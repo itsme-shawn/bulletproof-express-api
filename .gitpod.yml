@@ -1,0 +1,7 @@
+image:
+  file: .gitpod.Dockerfile
+
+tasks:
+  - init: npm install
+    command: zsh
+  - command: git config commit.template ./.git-commit-template && mkdir -p /workspace/data && mongod --dbpath /workspace/data
