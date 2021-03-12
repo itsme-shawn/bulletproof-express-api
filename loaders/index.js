@@ -1,8 +1,9 @@
-import expressLoader from './expressLoader.js'
+import expressLoader from './expressLoader'
+import mongoLoader from './mongoLoader'
 
-// 나중에 DB loader 가 들어가면 비동기로 처리해야함
-const loaders = (app) => {
+const loaders = async (app) => {
   console.log('loader start')
+  await mongoLoader()
   expressLoader(app)
   console.log('loader end')
 }

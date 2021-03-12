@@ -1,9 +1,12 @@
 import express from 'express'
-import loaders from './loaders'
+import config from './config'
 
-const app = express()
-const PORT = 5000
+async function startServer() {
+  const app = express()
 
-loaders(app) // 나중에 DB loader 가 들어가면 비동기로 처리해야함
+  await require('./loaders').default(app)
 
-app.listen(PORT, () => console.log(`👌Express Server Running on PORT ${PORT}`))
+  app.listen(config.PORT, () => console.log(`👌Express Server Running on PORT ${config.PORT}`))
+}
+
+startServer()

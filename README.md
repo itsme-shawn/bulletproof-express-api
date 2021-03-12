@@ -11,6 +11,8 @@
 2. Service(Business Logic) Layer : 비즈니스 로직을 담당한다.
 3. Data Access Layer : DB I/O 작업을 담당한다.
 
+각각의 레이어에서 다른 레이어를 호출함으로써 소프트웨어가 구성된다.
+
 ## 폴더 구조
 
 ```
