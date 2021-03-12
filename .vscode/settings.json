@@ -9,7 +9,7 @@
   "editor.tabCompletion": "on",
   "editor.wordWrap": "on",
   "editor.tabSize": 2,
-  "workbench.colorTheme": "Atom One Dark",
+  "workbench.colorTheme": "One Dark Pro",
   "eslint.format.enable": true,
   "workbench.iconTheme": "vs-seti",
   "terminal.integrated.shell.linux": "/usr/bin/zsh",

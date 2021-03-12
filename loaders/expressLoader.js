@@ -1,6 +1,6 @@
 import cookieParser from 'cookie-parser'
 import bodyParser from 'body-parser'
-import api from '../api/index.js'
+import api from '../api'
 
 const expressLoader = (app) => {
   app.use(cookieParser())

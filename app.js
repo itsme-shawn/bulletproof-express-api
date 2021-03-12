@@ -1,5 +1,5 @@
 import express from 'express'
-import loaders from './loaders/index.js'
+import loaders from './loaders'
 
 const app = express()
 const PORT = 5000
