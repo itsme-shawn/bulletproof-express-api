@@ -32,7 +32,6 @@ router.get('/', async (req, res) => {
 // ROUTE: /users
 router.post('/', async (req, res) => {
   const { name, password } = req.body
-
   const user = await userService.createUser(name, password)
 
   res.send(`User with the name ${user.name} added to the DB`)
@@ -41,7 +40,6 @@ router.post('/', async (req, res) => {
 // ROUTE: /users/:id
 router.get('/:id', async (req, res) => {
   const { id } = req.params
-
   const foundUser = await userService.findUserById(id)
 
   res.send(foundUser)
@@ -50,7 +48,6 @@ router.get('/:id', async (req, res) => {
 // ROUTE: /users/:id
 router.delete('/:id', async (req, res) => {
   const { id } = req.params
-
   await userService.deleteUser(id)
 
   res.send(`User with the id ${id} deleted from the DB`)
@@ -60,13 +57,9 @@ router.delete('/:id', async (req, res) => {
 router.patch('/:id', async (req, res) => {
   const { id } = req.params
   const { name, password } = req.body
-
   const foundUser = await userService.findUserById(id)
-
   if (name) { foundUser.name = name }
-
   if (password) { foundUser.password = password }
-
   foundUser.save()
 
   res.send(foundUser)
