@@ -9,7 +9,7 @@
 
 1. Presentation Layer(Route API Controller) : Route API 를 통해 HTTP 통신(req,res)을 담당한다.
 2. Service(Business Logic) Layer : 비즈니스 로직을 담당한다.
-3. Data Access Layer : DB I/O 작업을 담당한다.
+3. Data Access Layer : DB 모델
 
 각각의 레이어에서 다른 레이어를 호출함으로써 소프트웨어가 구성된다.
 
