@@ -1,9 +1,9 @@
 import expressLoader from './expressLoader'
 import mongoLoader from './mongoLoader'
 
-const loaders = async (app) => {
+const loaders = (app) => {
   console.log('loader start')
-  await mongoLoader()
+  mongoLoader()
   expressLoader(app)
   console.log('loader end')
 }

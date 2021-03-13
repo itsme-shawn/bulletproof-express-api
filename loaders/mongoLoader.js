@@ -1,8 +1,9 @@
 import mongoose from 'mongoose'
 import config from '../config'
 
-const mongoLoader = async () => {
-  await mongoose.connect(config.MONGO_URL, {
+const mongoLoader = () => {
+  console.log('mongo')
+  mongoose.connect(config.MONGO_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false,

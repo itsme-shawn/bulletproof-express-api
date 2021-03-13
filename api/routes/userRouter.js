@@ -1,8 +1,8 @@
 import express from 'express'
 import { v4 as uuidv4 } from 'uuid'
-import fakeUsers from '../../models/fakeUserDB'
+import UserService from '../../services/userService'
 
-let users = fakeUsers
+const userService = new UserService()
 
 /*
   CREATE : POST
@@ -20,56 +20,56 @@ let users = fakeUsers
 */
 
 // '/users' 라우터
-
 const router = express.Router()
 
-// /users
-router.get('/', (req, res) => {
-  res.send(users)
+// ROUTE: /users
+router.get('/', async (req, res) => {
+  const user = await userService.findUsers()
+
+  res.send(user)
 })
 
-// /users
-router.post('/', (req, res) => {
-  console.log(req.body)
-  const user = req.body
+// ROUTE: /users
+router.post('/', async (req, res) => {
+  const { name, password } = req.body
 
-  users.push({ id: uuidv4(), ...user }) // ES6 spread 연산자
+  const user = await userService.createUser(name, password)
 
-  res.send(`User with the name ${user.firstName} added to the DB`)
+  res.send(`User with the name ${user.name} added to the DB`)
 })
 
-// /users/:id
-router.get('/:id', (req, res) => {
+// ROUTE: /users/:id
+router.get('/:id', async (req, res) => {
   const { id } = req.params
 
-  const foundUser = users.find((user) => user.id === id)
-  // Array.prototype.find() : 콜백함수에서 true 를 리턴하는 첫 번째 요소를 리턴
+  const foundUser = await userService.findUserById(id)
 
   res.send(foundUser)
 })
 
-router.delete('/:id', (req, res) => {
+// ROUTE: /users/:id
+router.delete('/:id', async (req, res) => {
   const { id } = req.params
 
-  users = users.filter((user) => user.id !== id)
-  // Array.prototype.filter() : 콜백함수에서 true 리턴하는 모든 요소를 모아 새로운 배열로 반환
+  await userService.deleteUser(id)
 
   res.send(`User with the id ${id} deleted from the DB`)
 })
 
-router.patch('/:id', (req, res) => {
+// ROUTE: /users/:id
+router.patch('/:id', async (req, res) => {
   const { id } = req.params
-  const { firstName, lastName, age } = req.body
+  const { name, password } = req.body
 
-  const foundUser = users.find((user) => user.id === id)
+  const foundUser = await userService.findUserById(id)
 
-  if (firstName) { foundUser.firstName = firstName }
+  if (name) { foundUser.name = name }
 
-  if (lastName) { foundUser.lastName = lastName }
+  if (password) { foundUser.password = password }
 
-  if (age) { foundUser.age = age }
+  foundUser.save()
 
-  res.send(`User with the id ${id} has been updated`)
+  res.send(foundUser)
 })
 
 export default router
